@@ -1,5 +1,4 @@
 var app = require('http').createServer(handler)
-var io = require('socket.io')(app);
 var fs = require('fs');
 
 const albums = {
@@ -53,7 +52,7 @@ const albums = {
 }
 
 const getAccounts = async (callback) => {
-  fs.readFile(file, 'utf8', async (err, data) => {
+  fs.readFile('napsterAccount.txt', 'utf8', async (err, data) => {
     if (err) return console.log(err);
 
     fs.readFile('napsterAccountDel.txt', 'utf8', async (err2, dataDel) => {
@@ -64,12 +63,7 @@ const getAccounts = async (callback) => {
       dataDel = dataDel.split(',').filter(e => e)
       Taccounts = Taccounts.filter(e => dataDel.indexOf(e) < 0)
 
-      Object.values(streams).forEach(s => Taccounts = Taccounts.filter(a => a !== s.account))
-      Object.values(used).forEach(usedaccount => Taccounts = Taccounts.filter(a => a !== usedaccount))
-      checkAccounts && checkAccounts.forEach(CA => Taccounts = Taccounts.filter(a => a !== CA))
-
-      accounts = Taccounts
-      callback(accounts)
+      callback(Taccounts)
     })
   });
 }
@@ -87,15 +81,15 @@ function handler(req, res) {
   res.writeHead(200);
 
   switch (req.url) {
-    case 'albums':
+    case '/albums':
       res.end(JSON.stringify(albums));
       break
 
-    case 'accounts':
+    case '/accounts':
       getAccounts(a => res.end(JSON.stringify(a)))
       break
 
-    case 'checkAccounts':
+    case '/checkAccounts':
       getCheckAccounts(a => res.end(JSON.stringify(a)))
       break
 
@@ -105,8 +99,8 @@ function handler(req, res) {
   }
 }
 
-io.on('connection', client => {
-  client.emit('activate', client.id)
-})
+// io.on('connection', client => {
+//   client.emit('activate', client.id)
+// })
 
 app.listen(process.env.PORT || 3000);
