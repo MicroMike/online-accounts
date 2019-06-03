@@ -54,24 +54,15 @@ const albums = {
 const getAccounts = async (callback) => {
   fs.readFile('napsterAccount.txt', 'utf8', async (err, data) => {
     if (err) return console.log(err);
-
-    fs.readFile('napsterAccountDel.txt', 'utf8', async (err2, dataDel) => {
-      if (err2) return console.log(err2);
-
-      let Taccounts = data.split(',')
-
-      dataDel = dataDel.split(',').filter(e => e)
-      Taccounts = Taccounts.filter(e => dataDel.indexOf(e) < 0)
-
-      callback(Taccounts)
-    })
+    const accounts = data.split(',').filter(e => e)
+    callback(accounts)
   });
 }
 
 const getCheckAccounts = async (callback) => {
   fs.readFile('check.txt', 'utf8', async (err, data) => {
     if (err) return console.log(err);
-    checkAccounts = data.split(',').filter(e => e)
+    const checkAccounts = data.split(',').filter(e => e)
     callback(checkAccounts)
   })
 }
