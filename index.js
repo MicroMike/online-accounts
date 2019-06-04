@@ -16,25 +16,14 @@ const SAccount = new mongoose.Schema({
 
 const MAccount = mongoose.model('Account', SAccount, 'accounts');
 
-const mongo = (account) => {
-  const maccount = new MAccount({ account });
-  maccount.save(function (err, a) {
-    if (err) return console.error(err);
-    console.log(a, 'ok')
-  });
-}
-
-function handler(req, res) {
-  fs.readFile(__dirname + '/index.html',
-    function (err, data) {
-      if (err) {
-        res.writeHead(500);
-        return res.end('Error loading index.html');
-      }
-
-      res.writeHead(200);
-      res.end(data);
+const mongo = (accounts) => {
+  accounts.forEach(a => {
+    const maccount = new MAccount({ account: a });
+    maccount.save(function (err, Ra) {
+      if (err) return console.error(err);
+      console.log(Ra, 'ok')
     });
+  });
 }
 
 const albums = {
@@ -90,10 +79,6 @@ const albums = {
 const getAccounts = async (callback) => {
   fs.readFile('napsterAccount.txt', 'utf8', async (err, data) => {
     if (err) return console.log(err);
-    const accounts = data.split(',').filter(e => {
-      mongo(e)
-      return true
-    })
 
     callback(accounts)
   });
@@ -112,6 +97,10 @@ function handler(req, res) {
   res.writeHead(200);
 
   switch (req.url) {
+    case '/setAccounts':
+      getAccounts(mongo)
+      break
+
     case '/albums':
       res.end(JSON.stringify(albums));
       break
