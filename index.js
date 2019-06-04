@@ -80,16 +80,16 @@ const getAccounts = async (callback) => {
   MAccount.find(function (err, Ra) {
     if (err) return console.error(err);
     const accounts = Ra.map(a => a.account)
-    console.log(accounts);
-    // callback(accounts)
+    // console.log(accounts);
+    callback(accounts)
   })
 
-  fs.readFile('napsterAccount.txt', 'utf8', async (err, data) => {
-    if (err) return console.log(err);
-    const accounts = data.split(',').filter(e => e)
+  // fs.readFile('napsterAccount.txt', 'utf8', async (err, data) => {
+  //   if (err) return console.log(err);
+  //   const accounts = data.split(',').filter(e => e)
 
-    callback(accounts)
-  });
+  //   callback(accounts)
+  // });
 }
 
 const getCheckAccounts = async (callback) => {
