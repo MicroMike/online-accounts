@@ -18,6 +18,7 @@ const MAccount = mongoose.model('Account', SAccount, 'accounts');
 const SGain = new mongoose.Schema({
   plays: Number,
   nexts: Number,
+  time: Number,
 });
 const MGain = mongoose.model('Gain', SGain, 'gain');
 
@@ -133,6 +134,7 @@ function handler(req, res) {
         p[0] && p[1] && MGain.findOne((err, Rg) => {
           Rg.plays = Number(p[0])
           Rg.nexts = Number(p[1])
+          Rg.time = Number(p[2])
           Rg.save((err, g) => {
             res.end(JSON.stringify(g))
           })
