@@ -136,16 +136,13 @@ function handler(req, res) {
 
           if (!Rg) {
             const r = new MGain({ plays: 0, nexts: 0, time: 0 })
-            r.save()
-            res.end(JSON.stringify(g))
+            r.save((err, g) => { res.end(JSON.stringify(g)) })
           }
           else {
             Rg.plays = Number(p[0])
             Rg.nexts = Number(p[1])
             Rg.time = Number(p[2])
-            Rg.save((err, g) => {
-              res.end(JSON.stringify(g))
-            })
+            Rg.save((err, g) => { res.end(JSON.stringify(g)) })
           }
         })
       }
