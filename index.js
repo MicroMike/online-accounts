@@ -132,18 +132,35 @@ function handler(req, res) {
       if (params) {
         const p = params.split('/')
         p[0] && p[1] && MGain.findOne((err, Rg) => {
-          Rg.plays = Number(p[0])
-          Rg.nexts = Number(p[1])
-          Rg.time = Number(p[2])
-          Rg.save((err, g) => {
+          if (err) return console.error(err);
+
+          if (!Rg) {
+            const r = new MGain({ plays: 0, nexts: 0, time: 0 })
+            r.save()
             res.end(JSON.stringify(g))
-          })
+          }
+          else {
+            Rg.plays = Number(p[0])
+            Rg.nexts = Number(p[1])
+            Rg.time = Number(p[2])
+            Rg.save((err, g) => {
+              res.end(JSON.stringify(g))
+            })
+          }
         })
       }
       else {
         MGain.findOne(function (err, Rg) {
           if (err) return console.error(err);
-          res.end(JSON.stringify(Rg))
+
+          if (!Rg) {
+            const r = new MGain({ plays: 0, nexts: 0, time: 0 })
+            r.save()
+            res.end(JSON.stringify(g))
+          }
+          else {
+            res.end(JSON.stringify(Rg))
+          }
         })
       }
       break
