@@ -102,8 +102,7 @@ function handler(req, res) {
 
   switch (url) {
     case '/addAccount':
-      console.log(params)
-      // mongo([params.account])
+      params && mongo([params])
       res.end(JSON.stringify({ index: true }));
       break
 
