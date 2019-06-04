@@ -21,7 +21,7 @@ const mongo = (accounts) => {
     const maccount = new MAccount({ account: a });
     maccount.save(function (err, Ra) {
       if (err) return console.error(err);
-      console.log(Ra, 'ok')
+      console.log(Ra.account, 'ok')
     });
   });
 }
@@ -96,10 +96,16 @@ const getCheckAccounts = async (callback) => {
 function handler(req, res) {
   res.setHeader('Content-Type', 'application/json');
   res.writeHead(200);
-  console.log(req)
-  switch (req.url) {
+
+  const params = []
+
+  const url = req.url.split('?')[0]
+  req.url.split('?')[1].split('&').forEach(p => { arr = p.split('='); params[arr[0]] = arr[1] })
+
+  switch (url) {
     case '/addAccount':
-      getAccounts(mongo)
+      console.log(params.account)
+      // mongo([params.account])
       res.end(JSON.stringify({ index: true }));
       break
 
