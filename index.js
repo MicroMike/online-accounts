@@ -152,8 +152,7 @@ function handler(req, res) {
 
           if (!Rg) {
             const r = new MGain({ plays: 0, nexts: 0, time: 0 })
-            r.save()
-            res.end(JSON.stringify(g))
+            r.save((err, g) => { res.end(JSON.stringify(g)) })
           }
           else {
             res.end(JSON.stringify(Rg))
