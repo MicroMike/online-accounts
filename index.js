@@ -96,10 +96,16 @@ const getCheckAccounts = async (callback) => {
 function handler(req, res) {
   res.setHeader('Content-Type', 'application/json');
   res.writeHead(200);
-
+  console.log(req)
   switch (req.url) {
+    case '/addAccount':
+      getAccounts(mongo)
+      res.end(JSON.stringify({ index: true }));
+      break
+
     case '/setAccounts':
       getAccounts(mongo)
+      res.end(JSON.stringify({ index: true }));
       break
 
     case '/albums':
