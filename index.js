@@ -77,6 +77,12 @@ const albums = {
 }
 
 const getAccounts = async (callback) => {
+  MAccount.find(function (err, accounts) {
+    if (err) return console.error(err);
+    console.log(accounts);
+    // callback(accounts)
+  })
+
   fs.readFile('napsterAccount.txt', 'utf8', async (err, data) => {
     if (err) return console.log(err);
     const accounts = data.split(',').filter(e => e)
