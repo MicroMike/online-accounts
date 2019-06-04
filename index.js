@@ -16,7 +16,8 @@ const SAccount = new mongoose.Schema({
 const MAccount = mongoose.model('Account', SAccount, 'accounts');
 
 const SGain = new mongoose.Schema({
-  gain: Number,
+  plays: Number,
+  nexts: Number,
 });
 const MGain = mongoose.model('Gain', SGain, 'gain');
 
@@ -128,7 +129,8 @@ function handler(req, res) {
 
     case '/gain':
       if (params) {
-        MGain.findOneAndUpdate({}, { gain: params })
+        const p = params.split('/')
+        p[0] && p[1] && MGain.findOneAndUpdate({}, { plays: p[0], nexts: p[1] })
       }
       else {
         MGain.find(function (err, Rg) {
