@@ -17,8 +17,8 @@ const SAccount = new mongoose.Schema({
 const MAccount = mongoose.model('Account', SAccount, 'accounts');
 
 const mongo = (account) => {
-  const account = new MAccount({ account });
-  account.save(function (err, a) {
+  const maccount = new MAccount({ account });
+  maccount.save(function (err, a) {
     if (err) return console.error(err);
     console.log(a, 'ok')
   });
