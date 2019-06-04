@@ -130,8 +130,6 @@ function handler(req, res) {
     case '/gain':
       if (params) {
         const p = params.split('/')
-        const mgain = new MGain({ plays: 0, nexts: 0 });
-        mgain.save()
         p[0] && p[1] && MGain.findOneAndUpdate({}, { plays: Number(p[0]), nexts: Number(p[1]) })
       }
       else {
