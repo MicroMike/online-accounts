@@ -13,8 +13,12 @@ mongoose.connect(process.env.MONGODB_URI, (error) => {
 const SAccount = new mongoose.Schema({
   account: String,
 });
-
 const MAccount = mongoose.model('Account', SAccount, 'accounts');
+
+const SGain = new mongoose.Schema({
+  gain: Number,
+});
+const MGain = mongoose.model('Gain', SGain, 'gain');
 
 const mongo = (accounts) => {
   accounts.forEach(a => {
@@ -80,16 +84,8 @@ const getAccounts = async (callback) => {
   MAccount.find(function (err, Ra) {
     if (err) return console.error(err);
     const accounts = Ra.map(a => a.account)
-    // console.log(accounts);
     callback(accounts)
   })
-
-  // fs.readFile('napsterAccount.txt', 'utf8', async (err, data) => {
-  //   if (err) return console.log(err);
-  //   const accounts = data.split(',').filter(e => e)
-
-  //   callback(accounts)
-  // });
 }
 
 const getCheckAccounts = async (callback) => {
@@ -128,6 +124,18 @@ function handler(req, res) {
 
     case '/checkAccounts':
       getCheckAccounts(a => res.end(JSON.stringify(a)))
+      break
+
+    case '/gain':
+      if (params) {
+        MGain.findOneAndUpdate({}, { gain: params })
+      }
+      else {
+        MGain.find(function (err, Rg) {
+          if (err) return console.error(err);
+          res.end(JSON.stringify(Rg[0])
+        })
+      }
       break
 
     default:
