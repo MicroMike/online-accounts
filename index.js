@@ -77,8 +77,9 @@ const albums = {
 }
 
 const getAccounts = async (callback) => {
-  MAccount.find(function (err, accounts) {
+  MAccount.find(function (err, Ra) {
     if (err) return console.error(err);
+    const accounts = Ra.map(a => a.account)
     console.log(accounts);
     // callback(accounts)
   })
