@@ -133,7 +133,7 @@ function handler(req, res) {
       else {
         MGain.find(function (err, Rg) {
           if (err) return console.error(err);
-          res.end(JSON.stringify(Rg[0])
+          res.end(JSON.stringify(Rg[0]))
         })
       }
       break
