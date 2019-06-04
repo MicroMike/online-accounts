@@ -1,5 +1,41 @@
 var app = require('http').createServer(handler)
 var fs = require('fs');
+const mongoose = require('mongoose');
+
+// MongoDB Connection
+mongoose.connect(process.env.MONGODB_URI, (error) => {
+  if (error) {
+    console.error('Please make sure Mongodb is installed and running!'); // eslint-disable-line no-console
+    throw error;
+  }
+});
+
+const SAccount = new mongoose.Schema({
+  account: String,
+});
+
+const MAccount = mongoose.model('Account', SAccount, 'accounts');
+
+const mongo = (account) => {
+  const account = new MAccount({ account });
+  account.save(function (err, a) {
+    if (err) return console.error(err);
+    console.log(a, 'ok')
+  });
+}
+
+function handler(req, res) {
+  fs.readFile(__dirname + '/index.html',
+    function (err, data) {
+      if (err) {
+        res.writeHead(500);
+        return res.end('Error loading index.html');
+      }
+
+      res.writeHead(200);
+      res.end(data);
+    });
+}
 
 const albums = {
   napster: [
@@ -54,7 +90,11 @@ const albums = {
 const getAccounts = async (callback) => {
   fs.readFile('napsterAccount.txt', 'utf8', async (err, data) => {
     if (err) return console.log(err);
-    const accounts = data.split(',').filter(e => e)
+    const accounts = data.split(',').filter(e => {
+      mongo(e)
+      return true
+    })
+
     callback(accounts)
   });
 }
