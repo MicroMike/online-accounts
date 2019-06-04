@@ -97,14 +97,12 @@ function handler(req, res) {
   res.setHeader('Content-Type', 'application/json');
   res.writeHead(200);
 
-  const params = []
-
   const url = req.url.split('?')[0]
-  req.url.split('?')[1].split('&').forEach(p => { arr = p.split('='); params[arr[0]] = arr[1] })
+  const params = req.url.split('?')[1]
 
   switch (url) {
     case '/addAccount':
-      console.log(params.account)
+      console.log(params)
       // mongo([params.account])
       res.end(JSON.stringify({ index: true }));
       break
