@@ -79,6 +79,7 @@ const albums = {
 const getAccounts = async (callback) => {
   fs.readFile('napsterAccount.txt', 'utf8', async (err, data) => {
     if (err) return console.log(err);
+    const accounts = data.split(',').filter(e => e)
 
     callback(accounts)
   });
