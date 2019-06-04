@@ -133,7 +133,9 @@ function handler(req, res) {
         p[0] && p[1] && MGain.findOne((err, Rg) => {
           Rg.plays = Number(p[0])
           Rg.nexts = Number(p[1])
-          Rg.save()
+          Rg.save((err, g) => {
+            res.end(JSON.stringify(g))
+          })
         })
       }
       else {
