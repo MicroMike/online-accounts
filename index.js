@@ -27,7 +27,7 @@ const MGain = mongoose.model('Gain', SGain, 'gain');
 
 const mongo = (accounts) => {
   accounts.forEach(a => {
-    const maccount = new MAccount({ account: a });
+    const maccount = new MAccount({ account: a, check: false, del: false });
     maccount.save(function (err, Ra) {
       if (err) return console.error(err);
       console.log(Ra.account, 'ok')
@@ -86,14 +86,9 @@ const albums = {
 }
 
 const getAccounts = async (callback) => {
-  MAccount.find({}, function (err, Ra) {
+  MAccount.find({ check: false, del: false }, function (err, Ra) {
     if (err) return console.error(err);
-    const accounts = Ra.map(a => {
-      a.del = false
-      a.check = false
-      a.save((err, a) => console.log(a, 'ok'))
-      return a.account
-    })
+    const accounts = Ra.map(a => a.account)
     callback(accounts)
   })
 }
@@ -129,10 +124,10 @@ function handler(req, res) {
       res.end(JSON.stringify({ index: true }));
       break
 
-    case '/setAccounts':
-      getAccounts(mongo)
-      res.end(JSON.stringify({ index: true }));
-      break
+    // case '/setAccounts':
+    //   getAccounts(mongo)
+    //   res.end(JSON.stringify({ index: true }));
+    //   break
 
     case '/albums':
       res.end(JSON.stringify(albums));
