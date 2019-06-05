@@ -94,10 +94,10 @@ const getAccounts = async (callback) => {
 }
 
 const getCheckAccounts = async (callback) => {
-  fs.readFile('check.txt', 'utf8', async (err, data) => {
-    if (err) return console.log(err);
-    const checkAccounts = data.split(',').filter(e => e)
-    callback(checkAccounts)
+  MAccount.find({ check: true }, function (err, Ra) {
+    if (err) return console.error(err);
+    const accounts = Ra.map(a => a.account)
+    callback(accounts)
   })
 }
 
