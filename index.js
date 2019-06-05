@@ -85,10 +85,16 @@ const albums = {
   ]
 }
 
-const getAccounts = async (callback) => {
+const getAccounts = async (callback, reset) => {
   MAccount.find({ check: false, del: false }, function (err, Ra) {
     if (err) return console.error(err);
-    const accounts = Ra.map(a => a.account)
+    const accounts = Ra.map(a => {
+      if (reset) {
+        a.check = false
+        a.del = false
+      }
+      return a.account
+    })
     callback(accounts)
   })
 }
@@ -124,10 +130,9 @@ function handler(req, res) {
       res.end(JSON.stringify({ index: true }));
       break
 
-    // case '/setAccounts':
-    //   getAccounts(mongo)
-    //   res.end(JSON.stringify({ index: true }));
-    //   break
+    case '/reset':
+      getAccounts(a => res.end(JSON.stringify(a)), true)
+      break
 
     case '/albums':
       res.end(JSON.stringify(albums));
