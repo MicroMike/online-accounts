@@ -106,6 +106,15 @@ function handler(req, res) {
   const params = req.url.split('?')[1]
 
   switch (url) {
+    case '/error':
+      params && MAccount.findOne({ account: params }, (err, Ra) => {
+        if (err) return console.error(err);
+        Ra.check = true
+        Ra.save((err, a) => { res.end(JSON.stringify(a)) })
+      })
+      res.end(JSON.stringify({ index: true }));
+      break
+
     case '/addAccount':
       params && mongo([params])
       res.end(JSON.stringify({ index: true }));
