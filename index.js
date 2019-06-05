@@ -12,6 +12,8 @@ mongoose.connect(process.env.MONGODB_URI, (error) => {
 
 const SAccount = new mongoose.Schema({
   account: String,
+  pending: Boolean,
+  check: Boolean,
 });
 const MAccount = mongoose.model('Account', SAccount, 'accounts');
 
