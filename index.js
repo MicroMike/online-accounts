@@ -44,7 +44,7 @@ const albums = {
     'https://app.napster.com/artist/dj-reid/album/satisfaction-spell',
     'https://app.napster.com/artist/xondes/album/the-last-heat',
     'https://app.napster.com/artist/dj-otl/album/about-other-people',
-    'https://app.napster.com/artist/dhn/album/blue-gun',
+    // 'https://app.napster.com/artist/dhn/album/blue-gun',
     // 'https://app.napster.com/artist/hanke/album/new-york-story',
     // 'https://app.napster.com/artist/hanke/album/100-revenge',
     // 'https://app.napster.com/artist/lapilluledors/album/red-beast',
