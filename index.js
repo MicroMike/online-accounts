@@ -111,7 +111,7 @@ function handler(req, res) {
   switch (url) {
     case '/error':
       const p = params.split('/')
-      p[0] && p[1] && MAccount.findOne({ account: params }, (err, Ra) => {
+      p[0] && p[1] && MAccount.findOne({ account: p[1] }, (err, Ra) => {
         if (err) return console.error(err);
         Ra[p[0]] = true
         Ra.save((err, a) => { res.end(JSON.stringify(a)) })
