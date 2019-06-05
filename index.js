@@ -92,6 +92,7 @@ const getAccounts = async (callback, reset) => {
       if (reset) {
         a.check = false
         a.del = false
+        a.save()
       }
       return a.account
     })
