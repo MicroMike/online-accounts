@@ -14,6 +14,7 @@ const SAccount = new mongoose.Schema({
   account: String,
   pending: Boolean,
   check: Boolean,
+  del: Boolean,
 });
 const MAccount = mongoose.model('Account', SAccount, 'accounts');
 
@@ -85,9 +86,14 @@ const albums = {
 }
 
 const getAccounts = async (callback) => {
-  MAccount.find(function (err, Ra) {
+  MAccount.find({}, function (err, Ra) {
     if (err) return console.error(err);
-    const accounts = Ra.map(a => a.account)
+    const accounts = Ra.map(a => {
+      a.del = false
+      a.check = false
+      a.save((err, a) => console.log(a, 'ok'))
+      return a.account
+    })
     callback(accounts)
   })
 }
@@ -109,9 +115,10 @@ function handler(req, res) {
 
   switch (url) {
     case '/error':
-      params && MAccount.findOne({ account: params }, (err, Ra) => {
+      const p = params.split('/')
+      p[0] && p[1] && MAccount.findOne({ account: params }, (err, Ra) => {
         if (err) return console.error(err);
-        Ra.check = true
+        Ra[p[0]] = true
         Ra.save((err, a) => { res.end(JSON.stringify(a)) })
       })
       res.end(JSON.stringify({ index: true }));
