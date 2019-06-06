@@ -147,6 +147,13 @@ function handler(req, res) {
       getCheckAccounts(a => res.end(JSON.stringify(a)))
       break
 
+    case '/checkOk':
+      params && MAccount.findOne({ account: params }, (err, Ra) => {
+        Ra.check = false
+        Ra.save((err, a) => { res.end(JSON.stringify(a)) })
+      })
+      break
+
     case '/gain':
       if (params) {
         const p = params.split('/')
