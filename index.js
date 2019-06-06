@@ -127,8 +127,10 @@ function handler(req, res) {
       break
 
     case '/addAccount':
-      params && mongo([params])
-      res.end(JSON.stringify({ index: true }));
+      params && MAccount.findOne({ account: params }, (err, Ra) => {
+        res.end(JSON.stringify({ index: true, account: Ra }));
+        !Ra && params && mongo([params])
+      })
       break
 
     case '/reset':
