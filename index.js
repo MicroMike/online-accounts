@@ -25,16 +25,6 @@ const SGain = new mongoose.Schema({
 });
 const MGain = mongoose.model('Gain', SGain, 'gain');
 
-const mongo = (accounts) => {
-  accounts.forEach(a => {
-    const maccount = new MAccount({ account: a, check: false, del: false });
-    maccount.save(function (err, Ra) {
-      if (err) return console.error(err);
-      console.log(Ra.account, 'ok')
-    });
-  });
-}
-
 const albums = {
   napster: [
     'https://app.napster.com/artist/honey/album/just-another-emotion',
@@ -108,6 +98,16 @@ const getCheckAccounts = async (callback) => {
   })
 }
 
+const mongo = (accounts) => {
+  accounts.forEach(a => {
+    const maccount = new MAccount({ account: a, check: false, del: false });
+    maccount.save(function (err, Ra) {
+      if (err) return console.error(err);
+      console.log(Ra.account, 'ok')
+    });
+  });
+}
+
 function handler(req, res) {
   res.setHeader('Content-Type', 'application/json');
   res.writeHead(200);
@@ -128,8 +128,8 @@ function handler(req, res) {
 
     case '/addAccount':
       params && MAccount.findOne({ account: params }, (err, Ra) => {
-        res.end(JSON.stringify({ index: true, account: Ra }));
         !Ra && params && mongo([params])
+        res.end(JSON.stringify({ index: true, account: Ra }));
       })
       break
 
