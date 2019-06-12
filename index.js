@@ -25,6 +25,12 @@ const SGain = new mongoose.Schema({
 });
 const MGain = mongoose.model('Gain', SGain, 'gain');
 
+const SSong = new mongoose.Schema({
+  song: String,
+  plays: Number,
+});
+const MSong = mongoose.model('Song', SSong, 'songs');
+
 const albums = {
   napster: [
     'https://app.napster.com/artist/honey/album/just-another-emotion',
@@ -153,6 +159,19 @@ function handler(req, res) {
       params && MAccount.findOne({ account: params }, (err, Ra) => {
         Ra.check = false
         Ra.save((err, a) => { res.end(JSON.stringify(a)) })
+      })
+      break
+
+    case '/listen':
+      params && MSong.findOne({ song: params }, (err, Ra) => {
+        if (!Ra) {
+          const r = new MSong({ song: params, plays: 1 })
+          r.save((err, g) => { res.end(JSON.stringify(g)) })
+        }
+        else {
+          Ra.plays = Ra.plays + 1
+          Ra.save((err, a) => { res.end(JSON.stringify(a)) })
+        }
       })
       break
 
