@@ -115,16 +115,6 @@ const getCheckAccounts = async (callback) => {
   })
 }
 
-const mongo = (accounts) => {
-  accounts.forEach(a => {
-    const maccount = new MAccount({ account: a, check: false, del: false });
-    maccount.save(function (err, Ra) {
-      if (err) return console.error(err);
-      console.log(Ra.account, 'ok')
-    });
-  });
-}
-
 function handler(req, res) {
   res.setHeader('Content-Type', 'application/json');
   res.writeHead(200);
@@ -144,10 +134,19 @@ function handler(req, res) {
       break
 
     case '/addAccount':
-      params && MAccount.findOne({ account: params }, (err, Ra) => {
-        !Ra && params && mongo([params])
-        res.end(JSON.stringify({ index: true, account: Ra }));
+      const p = params.split('/')
+      let accounts = {}
+      p && p.forEach(a => {
+        a && MAccount.findOne({ account: a }, (err, Ra) => {
+          if (Ra) {
+            accounts[a] = false
+          }
+          accounts[a] = true
+          const r = new MAccount({ account: a, check: false, del: false });
+          r.save((err, a) => { console.log(a) })
+        })
       })
+      res.end(JSON.stringify({ accounts }));
       break
 
     case '/reset':
