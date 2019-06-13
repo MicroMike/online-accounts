@@ -147,7 +147,7 @@ function handler(req, res) {
           }
         })
       })
-      res.end(JSON.stringify({ accounts }));
+      res.end(JSON.stringify({ accounts: accounts }));
       break
     }
 
