@@ -78,7 +78,6 @@ const albums = {
     'https://open.spotify.com/album/6045wkKBhEx1DBoqn3aXSe',
     'https://open.spotify.com/album/7Jh67aHTA9ly7R1OTbzqGF',
     // 'https://open.spotify.com/album/5509gS9cZUrbTFege0fpTk',
-    // GG
     'https://open.spotify.com/episode/5CTWjaln8LbP3JMnDfL2SR',
     'https://open.spotify.com/episode/4LNlZZiOy32VQvTGXJ9BR9',
     'https://open.spotify.com/episode/0zDeN4F8lTTrieI3IvsCiI',
@@ -88,7 +87,6 @@ const albums = {
     'https://open.spotify.com/episode/5QrKbluyFZsg6jJ26ye7f6',
     'https://open.spotify.com/episode/4AFzaLO87GuTdtSuIk82r2',
     'https://open.spotify.com/episode/5YwlHKInZK9O6So8trYhBm',
-    // GG
   ]
 }
 
