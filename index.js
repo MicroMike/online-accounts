@@ -70,7 +70,6 @@ const albums = {
   ],
   spotify: [
     'https://open.spotify.com/album/3FJdPTLyJVPYMqQQUyb6lr',
-    // 'https://open.spotify.com/album/5509gS9cZUrbTFege0fpTk',
     'https://open.spotify.com/album/2jmPHLM2be2g19841vHjWE',
     'https://open.spotify.com/album/5CPIRky6BGgl3CCdzMYAXZ',
     'https://open.spotify.com/album/0Tt1ldQ8b4zn5LRcM706ll',
@@ -78,6 +77,18 @@ const albums = {
     'https://open.spotify.com/album/4BR7o0DwEPj1wF1nfcypiY',
     'https://open.spotify.com/album/6045wkKBhEx1DBoqn3aXSe',
     'https://open.spotify.com/album/7Jh67aHTA9ly7R1OTbzqGF',
+    // 'https://open.spotify.com/album/5509gS9cZUrbTFege0fpTk',
+    // GG
+    'https://open.spotify.com/episode/5CTWjaln8LbP3JMnDfL2SR',
+    'https://open.spotify.com/episode/4LNlZZiOy32VQvTGXJ9BR9',
+    'https://open.spotify.com/episode/0zDeN4F8lTTrieI3IvsCiI',
+    'https://open.spotify.com/episode/07AeZf0ExTxB864NZIOGRP',
+    'https://open.spotify.com/episode/77PytpYZNCs6d8uyzwYn1p',
+    'https://open.spotify.com/episode/5get1YOTsPf6RAPIySupcV',
+    'https://open.spotify.com/episode/5QrKbluyFZsg6jJ26ye7f6',
+    'https://open.spotify.com/episode/4AFzaLO87GuTdtSuIk82r2',
+    'https://open.spotify.com/episode/5YwlHKInZK9O6So8trYhBm',
+    // GG
   ]
 }
 
