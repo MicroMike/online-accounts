@@ -140,9 +140,11 @@ function handler(req, res) {
           if (Ra) {
             accounts[a] = false
           }
-          accounts[a] = true
-          const r = new MAccount({ account: a, check: false, del: false });
-          r.save((err, a) => { console.log(a) })
+          else {
+            accounts[a] = true
+            const r = new MAccount({ account: a, check: false, del: false });
+            r.save((err, a) => { console.log(a) })
+          }
         })
       })
       res.end(JSON.stringify({ accounts }));
