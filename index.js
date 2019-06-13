@@ -121,8 +121,8 @@ function handler(req, res) {
   const params = req.url.split('?')[1]
 
   switch (url) {
-    case '/error':
-      const p = params.split('/')
+    case '/error': {
+      const p = params && params.split('/')
       p[0] && p[1] && MAccount.findOne({ account: p[1] }, (err, Ra) => {
         if (err) return console.error(err);
         Ra[p[0]] = true
@@ -130,9 +130,10 @@ function handler(req, res) {
       })
       res.end(JSON.stringify({ index: true }));
       break
+    }
 
-    case '/addAccount':
-      const p = params.split('/')
+    case '/addAccount': {
+      const p = params && params.split('/')
       let accounts = {}
       p && p.forEach(a => {
         a && MAccount.findOne({ account: a }, (err, Ra) => {
@@ -146,6 +147,7 @@ function handler(req, res) {
       })
       res.end(JSON.stringify({ accounts }));
       break
+    }
 
     case '/reset':
       getAccounts(a => res.end(JSON.stringify(a)), true)
