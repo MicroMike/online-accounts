@@ -223,8 +223,10 @@ function handler(req, res) {
 
     case '/spotifyPause': {
       MAccount.find({ "account": { "$regex": "^spotify", "$options": "i" } }, (err, Ra) => {
-        Ra.pause = true
-        Ra.save()
+        Ra.forEach(r => {
+          r.pause = true
+          r.save()
+        })
       })
     }
 
