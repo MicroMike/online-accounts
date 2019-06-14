@@ -92,7 +92,7 @@ const albums = {
 }
 
 const getAccounts = async (callback, reset) => {
-  MAccount.find(reset ? {} : { check: false, del: false }, function (err, Ra) {
+  MAccount.find(reset ? {} : { check: false, del: false, pause: { $ne: true } }, function (err, Ra) {
     if (err) return console.error(err);
     const accounts = Ra.map(a => {
       if (reset) {
