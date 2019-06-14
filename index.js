@@ -14,6 +14,7 @@ const SAccount = new mongoose.Schema({
   account: String,
   pending: Boolean,
   check: Boolean,
+  pause: Boolean,
   del: Boolean,
 });
 const MAccount = mongoose.model('Account', SAccount, 'accounts');
@@ -222,7 +223,7 @@ function handler(req, res) {
 
     case '/spotifyPause': {
       MAccount.find({ "account": { "$regex": "^spotify", "$options": "i" } }, (err, Ra) => {
-        Ra.check = true
+        Ra.pause = true
         Ra.save()
       })
     }
