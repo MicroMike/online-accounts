@@ -220,6 +220,13 @@ function handler(req, res) {
       }
       break
 
+    case '/spotifyPause': {
+      MAccount.find({ "account": { "$regex": "^spotify", "$options": "i" } }, (err, Ra) => {
+        Ra.check = true
+        Ra.save()
+      })
+    }
+
     default:
       res.end(JSON.stringify({ index: true }));
       break
