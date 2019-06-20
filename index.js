@@ -68,6 +68,7 @@ const albums = {
     'https://listen.tidal.com/album/105237098',
     'https://listen.tidal.com/album/108790098',
     'https://listen.tidal.com/album/108980716',
+    'https://listen.tidal.com/album/111577934',
   ],
   spotify: [
     'https://open.spotify.com/album/3FJdPTLyJVPYMqQQUyb6lr',
