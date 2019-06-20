@@ -79,6 +79,7 @@ const albums = {
     'https://open.spotify.com/album/4BR7o0DwEPj1wF1nfcypiY',
     'https://open.spotify.com/album/6045wkKBhEx1DBoqn3aXSe',
     'https://open.spotify.com/album/7Jh67aHTA9ly7R1OTbzqGF',
+    'https://open.spotify.com/album/6U2LK36oc2VweDgRi0u1A7',
     'https://open.spotify.com/episode/5CTWjaln8LbP3JMnDfL2SR',
     'https://open.spotify.com/episode/4LNlZZiOy32VQvTGXJ9BR9',
     'https://open.spotify.com/episode/0zDeN4F8lTTrieI3IvsCiI',
