@@ -61,7 +61,7 @@ const albums = {
     'https://music.amazon.fr/albums/B07TC99Y6V',
   ],
   tidal: [
-    'https://listen.tidal.com/album/93312939',
+    // 'https://listen.tidal.com/album/93312939',
     'https://listen.tidal.com/album/93087422',
     'https://listen.tidal.com/album/88716570',
     'https://listen.tidal.com/album/101927847',
