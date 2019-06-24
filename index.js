@@ -41,6 +41,7 @@ const albums = {
     'https://app.napster.com/artist/dj-reid/album/satisfaction-spell',
     'https://app.napster.com/artist/xondes/album/the-last-heat',
     'https://app.napster.com/artist/dj-otl/album/about-other-people',
+    'https://app.napster.com/artist/lenitap/album/above-everybody-wind',
     // 'https://app.napster.com/artist/dhn/album/blue-gun',
     // 'https://app.napster.com/artist/hanke/album/new-york-story',
     // 'https://app.napster.com/artist/hanke/album/100-revenge',
@@ -57,6 +58,7 @@ const albums = {
     'https://music.amazon.fr/albums/B07QCBN3Z4',
     'https://music.amazon.fr/albums/B07RGRZL9F',
     'https://music.amazon.fr/albums/B07RNYTBXG',
+    'https://music.amazon.fr/albums/B07TC99Y6V',
   ],
   tidal: [
     'https://listen.tidal.com/album/93312939',
